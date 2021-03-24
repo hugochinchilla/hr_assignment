@@ -21,4 +21,9 @@ class InMemoryDepartmentRepository implements DepartmentRepository
     {
         $this->departments[] = $department;
     }
+
+    public function deleteAll(): void
+    {
+        $this->departments = [];
+    }
 }

@@ -8,7 +8,16 @@ use PHPUnit\Framework\TestCase;
 
 abstract class DepartmentRepositoryTest extends TestCase
 {
+    private DepartmentRepository $implementation;
+
     abstract protected function getImplementation(): DepartmentRepository;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->implementation = $this->getImplementation();
+        $this->implementation->deleteAll();
+    }
 
     /** @test */
     public function can_insert_departments(): void
@@ -22,7 +31,6 @@ abstract class DepartmentRepositoryTest extends TestCase
     /** @test */
     public function can_read_departments(): void
     {
-        $this->markTestIncomplete("not implemented");
         $repo = $this->getImplementation();
         $repo->add(new Department('Marketing'));
 

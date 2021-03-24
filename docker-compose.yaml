@@ -15,3 +15,5 @@ services:
         environment:
             MYSQL_DATABASE: chessable_hr
             MYSQL_ROOT_PASSWORD: example
+        ports:
+            - 3306:3306

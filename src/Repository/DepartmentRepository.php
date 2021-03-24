@@ -14,4 +14,6 @@ interface DepartmentRepository
     public function all(): array;
 
     public function add(Department $department): void;
+
+    public function deleteAll(): void;
 }
