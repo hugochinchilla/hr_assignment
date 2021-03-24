@@ -4,14 +4,11 @@ declare(strict_types = 1);
 
 namespace Example\App\UseCase\ShowDepartmentsAlongHighestSalary;
 
-use Example\App\Entity\Department;
+use Example\App\Repository\DepartmentRepository;
 
 class ShowDepartmentsAlongHighestSalary
 {
-    /**
-     * @param Department[] $departments
-     */
-    public function __construct(private array $departments)
+    public function __construct(private DepartmentRepository $departmentRepository)
     {
     }
 
@@ -22,7 +19,7 @@ class ShowDepartmentsAlongHighestSalary
 
     private function generateReportEntries(): \Generator
     {
-        foreach ($this->departments as $department) {
+        foreach ($this->departmentRepository->all() as $department) {
             $highestSalary = 0;
             foreach ($department->employees() as $employee) {
                 if ($employee->salary() > $highestSalary) {
