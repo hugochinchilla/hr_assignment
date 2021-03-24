@@ -9,3 +9,9 @@ services:
         volumes:
             - ".:/code:cached"
         user: $DOCKER_COMPOSE_USER
+
+    mariadb:
+        image: mariadb
+        environment:
+            MYSQL_DATABASE: chessable_hr
+            MYSQL_ROOT_PASSWORD: example

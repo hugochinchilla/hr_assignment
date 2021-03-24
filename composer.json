@@ -2,7 +2,8 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=8.0.1"
+        "php": ">=8.0.1",
+        "doctrine/dbal": "^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
