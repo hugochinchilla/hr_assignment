@@ -8,7 +8,7 @@ use Example\App\Entity\Department;
 use Example\App\Entity\DepartmentId;
 use Ramsey\Uuid\Uuid;
 
-class DoctrineDepartmentRepository implements DepartmentRepository
+class DbalDepartmentRepository implements DepartmentRepository
 {
     private \Doctrine\DBAL\Connection $conn;
 
