@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Example\App\Repository;
 
 use Example\App\Entity\Department;
+use Example\App\Entity\DepartmentId;
 use Ramsey\Uuid\Uuid;
 
 class DoctrineDepartmentRepository implements DepartmentRepository
@@ -27,7 +28,7 @@ class DoctrineDepartmentRepository implements DepartmentRepository
     public function add(Department $department): void
     {
         $this->conn->insert('departments', [
-            'id' => Uuid::uuid4()->getBytes(),
+            'id' => $this->idToStorageFormat($department->id()),
             'name' => $department->name()
         ]);
     }
@@ -39,17 +40,27 @@ class DoctrineDepartmentRepository implements DepartmentRepository
      */
     private function generateAll(): \Generator
     {
-        $stmt = $this->conn->prepare("SELECT name FROM departments");
+        $stmt = $this->conn->prepare("SELECT id, name FROM departments");
         $stmt->execute();
         $cursor = $stmt->execute();
 
         foreach ($cursor->fetchAllAssociative() as $row) {
-            yield new Department($row['name']);
+            yield new Department($this->idFromStorageFormat($row['id']), $row['name']);
         };
     }
 
     public function deleteAll(): void
     {
         $this->conn->executeQuery('DELETE FROM departments');
+    }
+
+    private function idToStorageFormat(DepartmentId $id): string
+    {
+        return Uuid::fromString($id->toString())->getBytes();
+    }
+
+    private function idFromStorageFormat(string $id): DepartmentId
+    {
+        return DepartmentId::fromString(Uuid::fromBytes($id)->toString());
     }
 }

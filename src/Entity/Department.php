@@ -6,8 +6,13 @@ namespace Example\App\Entity;
 
 class Department
 {
-    public function __construct(private string $name, private array $employees = [])
+    public function __construct(private DepartmentId $id, private string $name, private array $employees = [])
     {
+    }
+
+    public function id(): DepartmentId
+    {
+        return $this->id;
     }
 
     public function name(): string

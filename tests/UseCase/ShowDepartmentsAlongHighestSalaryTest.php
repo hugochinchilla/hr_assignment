@@ -3,6 +3,7 @@
 namespace Example\Tests\UseCase;
 
 use Example\App\Entity\Department;
+use Example\App\Entity\DepartmentId;
 use Example\App\Entity\Employee;
 use Example\App\UseCase\ShowDepartmentsAlongHighestSalary\DepartmentReportEntry;
 use Example\App\UseCase\ShowDepartmentsAlongHighestSalary\ShowDepartmentsAlongHighestSalary;
@@ -15,7 +16,7 @@ class ShowDepartmentsAlongHighestSalaryTest extends TestCase
     public function a_department_without_employees_shows_zero_as_highest_salary(): void
     {
         $departmentRepo = new InMemoryDepartmentRepository();
-        $departmentRepo->add(new Department('Marketing'));
+        $departmentRepo->add(new Department(new DepartmentId(), 'Marketing'));
         $report = new ShowDepartmentsAlongHighestSalary($departmentRepo);
 
         $result = $report->execute();
@@ -30,10 +31,12 @@ class ShowDepartmentsAlongHighestSalaryTest extends TestCase
     {
         $departmentRepo = new InMemoryDepartmentRepository();
         $departmentRepo->add(
-            new Department('IT', [
-                new Employee('Hugo', 60000),
-                new Employee('John', 70000),
-            ]),
+            new Department(
+                new DepartmentId(), 'IT', [
+                                      new Employee('Hugo', 60000),
+                                      new Employee('John', 70000),
+                                  ]
+            ),
         );
         $report = new ShowDepartmentsAlongHighestSalary($departmentRepo);
 
