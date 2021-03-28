@@ -6,6 +6,7 @@ namespace Example\App\Infrastructure;
 
 use Example\App\Domain\Entity\Department;
 use Example\App\Domain\Entity\DepartmentRepository;
+use Example\App\Domain\Entity\Employee;
 use Example\App\Domain\ValueObject\DepartmentId;
 use Ramsey\Uuid\Uuid;
 
@@ -28,10 +29,21 @@ class DbalDepartmentRepository implements DepartmentRepository
 
     public function add(Department $department): void
     {
+        $departmentId = $this->idToStorageFormat($department->id());
+
         $this->conn->insert('departments', [
-            'id' => $this->idToStorageFormat($department->id()),
+            'id' => $departmentId,
             'name' => $department->name(),
         ]);
+
+        foreach ($department->employees() as $employee) {
+            $this->conn->insert('employees', [
+                'department_id' => $departmentId,
+                'id' => Uuid::uuid4()->getBytes(),
+                'name' => $employee->name(),
+                'salary' => $employee->salary(),
+            ]);
+        }
     }
 
     /**
@@ -45,7 +57,10 @@ class DbalDepartmentRepository implements DepartmentRepository
         $cursor = $stmt->execute();
 
         foreach ($cursor->fetchAllAssociative() as $row) {
-            yield new Department($this->idFromStorageFormat($row['id']), $row['name']);
+            $department = new Department($this->idFromStorageFormat($row['id']), $row['name']);
+            $this->loadDeparmtnetEmployees($department);
+
+            yield $department;
         }
     }
 
@@ -62,5 +77,17 @@ class DbalDepartmentRepository implements DepartmentRepository
     private function idFromStorageFormat(string $id): DepartmentId
     {
         return DepartmentId::fromString(Uuid::fromBytes($id)->toString());
+    }
+
+    private function loadDeparmtnetEmployees(Department $department): void
+    {
+        $stmt = $this->conn->prepare('SELECT name, salary FROM employees WHERE department_id=:department_id');
+        $stmt->execute(['department_id' => $this->idToStorageFormat($department->id())]);
+        $cursor = $stmt->execute();
+
+        foreach ($cursor->fetchAllAssociative() as $row) {
+            $employee = new Employee($row['name'], (int) $row['salary']);
+            $department->addEmployee($employee);
+        }
     }
 }
