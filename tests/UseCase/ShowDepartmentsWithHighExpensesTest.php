@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Example\Tests\UseCase\ShowDepartmentsWithHighExpenses;
 
 use Example\App\Entity\Department;

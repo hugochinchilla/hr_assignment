@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Example\Tests\UseCase;
 
 use Example\App\Entity\Department;
@@ -22,7 +24,7 @@ class ShowDepartmentsAlongHighestSalaryTest extends TestCase
         $result = $report->execute();
 
         self::assertEquals($result, [
-            new DepartmentReportEntry("Marketing", 0),
+            new DepartmentReportEntry('Marketing', 0),
         ]);
     }
 
@@ -43,7 +45,7 @@ class ShowDepartmentsAlongHighestSalaryTest extends TestCase
         $result = $report->execute();
 
         self::assertEquals($result, [
-            new DepartmentReportEntry("IT", 70000),
+            new DepartmentReportEntry('IT', 70000),
         ]);
     }
 }

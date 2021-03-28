@@ -29,24 +29,23 @@ class DoctrineDepartmentRepository implements DepartmentRepository
     {
         $this->conn->insert('departments', [
             'id' => $this->idToStorageFormat($department->id()),
-            'name' => $department->name()
+            'name' => $department->name(),
         ]);
     }
 
     /**
-     * @return \Generator
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
      */
     private function generateAll(): \Generator
     {
-        $stmt = $this->conn->prepare("SELECT id, name FROM departments");
+        $stmt = $this->conn->prepare('SELECT id, name FROM departments');
         $stmt->execute();
         $cursor = $stmt->execute();
 
         foreach ($cursor->fetchAllAssociative() as $row) {
             yield new Department($this->idFromStorageFormat($row['id']), $row['name']);
-        };
+        }
     }
 
     public function deleteAll(): void

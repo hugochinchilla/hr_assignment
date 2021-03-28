@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Example\Tests\Repository;
 
 use Example\App\Repository\DepartmentRepository;

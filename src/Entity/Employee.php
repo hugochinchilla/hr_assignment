@@ -6,7 +6,9 @@ namespace Example\App\Entity;
 
 class Employee
 {
-    public function __construct(private string $name, private int $salary) {}
+    public function __construct(private string $name, private int $salary)
+    {
+    }
 
     public function name(): string
     {

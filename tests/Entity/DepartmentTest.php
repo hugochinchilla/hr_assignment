@@ -15,7 +15,7 @@ class DepartmentTest extends TestCase
     {
         $anyDepartmentId = new DepartmentId();
 
-        $department = new Department($anyDepartmentId, "IT");
+        $department = new Department($anyDepartmentId, 'IT');
 
         $this->assertTrue($anyDepartmentId->equals($department->id()));
     }
@@ -23,7 +23,7 @@ class DepartmentTest extends TestCase
     /** @test */
     public function a_department_has_a_name(): void
     {
-        $department = new Department(new DepartmentId(), "IT");
+        $department = new Department(new DepartmentId(), 'IT');
 
         $this->assertEquals('IT', $department->name());
     }
