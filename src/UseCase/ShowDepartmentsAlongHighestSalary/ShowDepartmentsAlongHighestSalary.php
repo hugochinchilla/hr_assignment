@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Example\App\UseCase\ShowDepartmentsAlongHighestSalary;
 
-use Example\App\Repository\DepartmentRepository;
+use Example\App\Domain\Entity\DepartmentRepository;
 
 class ShowDepartmentsAlongHighestSalary
 {

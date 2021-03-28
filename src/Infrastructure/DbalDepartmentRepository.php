@@ -2,10 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Example\App\Repository;
+namespace Example\App\Infrastructure;
 
-use Example\App\Entity\Department;
-use Example\App\Entity\DepartmentId;
+use Example\App\Domain\Entity\Department;
+use Example\App\Domain\Entity\DepartmentRepository;
+use Example\App\Domain\ValueObject\DepartmentId;
 use Ramsey\Uuid\Uuid;
 
 class DbalDepartmentRepository implements DepartmentRepository

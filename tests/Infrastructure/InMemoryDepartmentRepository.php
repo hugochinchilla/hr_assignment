@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests\Repository;
+namespace Example\Tests\Infrastructure;
 
-use Example\App\Entity\Department;
-use Example\App\Repository\DepartmentRepository;
+use Example\App\Domain\Entity\Department;
+use Example\App\Domain\Entity\DepartmentRepository;
 
 class InMemoryDepartmentRepository implements DepartmentRepository
 {

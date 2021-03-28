@@ -2,9 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Example\App\Repository;
-
-use Example\App\Entity\Department;
+namespace Example\App\Domain\Entity;
 
 interface DepartmentRepository
 {

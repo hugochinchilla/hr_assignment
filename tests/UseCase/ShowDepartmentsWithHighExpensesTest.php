@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace Example\Tests\UseCase\ShowDepartmentsWithHighExpenses;
 
-use Example\App\Entity\Department;
-use Example\App\Entity\DepartmentId;
-use Example\App\Entity\Employee;
+use Example\App\Domain\Entity\Department;
+use Example\App\Domain\Entity\Employee;
+use Example\App\Domain\ValueObject\DepartmentId;
 use Example\App\UseCase\ShowDepartmentsWithHighExpenses\ShowDepartmentsWithHighExpenses;
-use Example\Tests\Repository\InMemoryDepartmentRepository;
+use Example\Tests\Infrastructure\InMemoryDepartmentRepository;
 use PHPUnit\Framework\TestCase;
 
 class ShowDepartmentsWithHighExpensesTest extends TestCase

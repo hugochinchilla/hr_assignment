@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests\Entity;
+namespace Example\Tests\Domain\Entity;
 
-use Example\App\Entity\Department;
-use Example\App\Entity\DepartmentId;
+use Example\App\Domain\Entity\Department;
+use Example\App\Domain\ValueObject\DepartmentId;
 use PHPUnit\Framework\TestCase;
 
 class DepartmentTest extends TestCase

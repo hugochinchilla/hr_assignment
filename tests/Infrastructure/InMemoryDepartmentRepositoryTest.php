@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests\Repository;
+namespace Example\Tests\Infrastructure;
 
-use Example\App\Repository\DepartmentRepository;
+use Example\App\Domain\Entity\DepartmentRepository;
 
 class InMemoryDepartmentRepositoryTest extends DepartmentRepositoryTest
 {
