@@ -6,6 +6,7 @@ namespace Example\App\Infrastructure;
 
 use Doctrine\DBAL\Connection;
 use Example\App\Domain\Entity\Department;
+use Example\App\Domain\Entity\DepartmentNotFound;
 use Example\App\Domain\Entity\DepartmentRepository;
 use Example\App\Domain\Entity\Employee;
 use Example\App\Domain\ValueObject\DepartmentId;

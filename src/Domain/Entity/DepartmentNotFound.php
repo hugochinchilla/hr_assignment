@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Example\App\Infrastructure;
+namespace Example\App\Domain\Entity;
 
 class DepartmentNotFound extends \Exception
 {
