@@ -24,21 +24,12 @@ class DbalDepartmentRepository implements DepartmentRepository
 
     public function add(Department $department): void
     {
-        $departmentId = $this->idToStorageFormat($department->id());
-
         $this->conn->insert('departments', [
-            'id' => $departmentId,
+            'id' => $this->idToStorageFormat($department->id()),
             'name' => $department->name(),
         ]);
 
-        foreach ($department->employees() as $employee) {
-            $this->conn->insert('employees', [
-                'department_id' => $departmentId,
-                'id' => Uuid::uuid4()->getBytes(),
-                'name' => $employee->name(),
-                'salary' => $employee->salary(),
-            ]);
-        }
+        $this->writeEmployees($department);
     }
 
     /**
@@ -84,5 +75,48 @@ class DbalDepartmentRepository implements DepartmentRepository
             $employee = new Employee($row['name'], (int) $row['salary']);
             $department->addEmployee($employee);
         }
+    }
+
+    public function update(Department $department): void
+    {
+        $this->deleteAllEmployeesForDepartment($department->id());
+        $this->writeEmployees($department);
+    }
+
+    public function getById(DepartmentId $id): Department
+    {
+        $stmt = $this->conn->prepare('SELECT name, salary FROM employees WHERE id=:id');
+        $cursor = $stmt->execute(['id' => $this->idToStorageFormat($id)]);
+
+        $row = $cursor->fetchAssociative();
+        if ($row === false) {
+            throw new DepartmentNotFound();
+        }
+
+        $department = new Department($id, $row['name']);
+        $this->loadDeparmtnetEmployees($department);
+
+        return $department;
+    }
+
+    private function writeEmployees(Department $department): void
+    {
+        foreach ($department->employees() as $employee) {
+            $this->conn->insert(
+                'employees',
+                [
+                    'department_id' => $this->idToStorageFormat($department->id()),
+                    'id' => Uuid::uuid4()->getBytes(),
+                    'name' => $employee->name(),
+                    'salary' => $employee->salary(),
+                ]
+            );
+        }
+    }
+
+    private function deleteAllEmployeesForDepartment(DepartmentId $id): void
+    {
+        $stmt = $this->conn->prepare('DELETE FROM employees WHERE department_id=:id');
+        $stmt->execute(['id' => $this->idToStorageFormat($id)]);
     }
 }

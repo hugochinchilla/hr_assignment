@@ -62,4 +62,20 @@ abstract class DepartmentRepositoryTest extends TestCase
         $this->assertEquals('Martin', $firstEmployee->name());
         $this->assertEquals(60000, $firstEmployee->salary());
     }
+
+    /** @test */
+    public function can_update_department_employees(): void
+    {
+        $anyDepartment = new Department(new DepartmentId(), 'Marketing', [
+            new Employee('Martin', 60000),
+        ]);
+        $this->implementation->add($anyDepartment);
+        $anyDepartment->addEmployee(new Employee('Mike', 30000));
+
+        $this->implementation->update($anyDepartment);
+
+        $departments = $this->implementation->all();
+        $readDepartment = $departments[0];
+        $this->assertCount(2, $readDepartment->employees());
+    }
 }

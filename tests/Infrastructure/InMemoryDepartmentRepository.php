@@ -6,6 +6,7 @@ namespace Example\Tests\Infrastructure;
 
 use Example\App\Domain\Entity\Department;
 use Example\App\Domain\Entity\DepartmentRepository;
+use Example\App\Domain\ValueObject\DepartmentId;
 
 class InMemoryDepartmentRepository implements DepartmentRepository
 {
@@ -25,5 +26,18 @@ class InMemoryDepartmentRepository implements DepartmentRepository
     public function deleteAll(): void
     {
         $this->departments = [];
+    }
+
+    public function update(Department $department): void
+    {
+    }
+
+    public function getById(DepartmentId $id): Department
+    {
+        $filtered = array_filter(
+            $this->departments,
+            fn (Department $d) => $d->id()->equals($id));
+
+        return $filtered[0];
     }
 }
