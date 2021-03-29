@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Example\App\Infrastructure;
 
+use Doctrine\DBAL\Connection;
 use Example\App\Domain\Entity\Department;
 use Example\App\Domain\Entity\DepartmentRepository;
 use Example\App\Domain\Entity\Employee;
@@ -12,14 +13,8 @@ use Ramsey\Uuid\Uuid;
 
 class DbalDepartmentRepository implements DepartmentRepository
 {
-    private \Doctrine\DBAL\Connection $conn;
-
-    public function __construct()
+    public function __construct(private Connection $conn)
     {
-        $connectionParams = [
-            'url' => 'mysql://root:example@mariadb/chessable_hr',
-        ];
-        $this->conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
     }
 
     public function all(): array

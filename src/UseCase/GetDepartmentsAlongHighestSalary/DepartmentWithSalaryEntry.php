@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Example\App\UseCase\ShowDepartmentsAlongHighestSalary;
+namespace Example\App\UseCase\GetDepartmentsAlongHighestSalary;
 
-class DepartmentReportEntry
+class DepartmentWithSalaryEntry
 {
     public function __construct(private string $name, private int $highestSalary)
     {

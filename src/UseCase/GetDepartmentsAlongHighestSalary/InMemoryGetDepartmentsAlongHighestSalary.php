@@ -2,16 +2,19 @@
 
 declare(strict_types = 1);
 
-namespace Example\App\UseCase\ShowDepartmentsAlongHighestSalary;
+namespace Example\App\UseCase\GetDepartmentsAlongHighestSalary;
 
 use Example\App\Domain\Entity\DepartmentRepository;
 
-class ShowDepartmentsAlongHighestSalary
+class InMemoryGetDepartmentsAlongHighestSalary implements GetDepartmentsAlongHighestSalaryInterface
 {
     public function __construct(private DepartmentRepository $departmentRepository)
     {
     }
 
+    /**
+     * @return DepartmentWithSalaryEntry[]
+     */
     public function execute(): array
     {
         return iterator_to_array($this->generateReportEntries());
@@ -27,7 +30,7 @@ class ShowDepartmentsAlongHighestSalary
                 }
             }
 
-            yield new DepartmentReportEntry($department->name(), $highestSalary);
+            yield new DepartmentWithSalaryEntry($department->name(), $highestSalary);
         }
     }
 }
