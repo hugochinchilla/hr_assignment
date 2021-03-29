@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests\UseCase\HireEmployee;
+namespace Example\App\UseCase\HireEmployee;
 
 use Example\App\Domain\ValueObject\DepartmentId;
 

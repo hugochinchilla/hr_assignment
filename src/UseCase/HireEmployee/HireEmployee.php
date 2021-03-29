@@ -6,7 +6,6 @@ namespace Example\App\UseCase\HireEmployee;
 
 use Example\App\Domain\Entity\DepartmentRepository;
 use Example\App\Domain\Entity\Employee;
-use Example\Tests\UseCase\HireEmployee\HireEmployeeCommand;
 
 class HireEmployee
 {

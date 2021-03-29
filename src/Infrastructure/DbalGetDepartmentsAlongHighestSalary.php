@@ -2,9 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Example\App\UseCase\GetDepartmentsAlongHighestSalary;
+namespace Example\App\Infrastructure;
 
 use Doctrine\DBAL\Connection;
+use Example\App\UseCase\GetDepartmentsAlongHighestSalary\DepartmentWithSalaryEntry;
+use Example\App\UseCase\GetDepartmentsAlongHighestSalary\GetDepartmentsAlongHighestSalaryInterface;
 
 class DbalGetDepartmentsAlongHighestSalary implements GetDepartmentsAlongHighestSalaryInterface
 {

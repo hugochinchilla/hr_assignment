@@ -7,6 +7,7 @@ namespace Example\Tests\UseCase\HireEmployee;
 use Example\App\Domain\Entity\Department;
 use Example\App\Domain\ValueObject\DepartmentId;
 use Example\App\UseCase\HireEmployee\HireEmployee;
+use Example\App\UseCase\HireEmployee\HireEmployeeCommand;
 use Example\Tests\Infrastructure\InMemoryDepartmentRepository;
 use PHPUnit\Framework\TestCase;
 

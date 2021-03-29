@@ -8,7 +8,7 @@ use Doctrine\DBAL\Connection;
 use Example\App\Domain\Entity\DepartmentRepository;
 use Example\App\Infrastructure\DbalConnectionFactory;
 use Example\App\Infrastructure\DbalDepartmentRepository;
-use Example\App\UseCase\GetDepartmentsAlongHighestSalary\DbalGetDepartmentsAlongHighestSalary;
+use Example\App\Infrastructure\DbalGetDepartmentsAlongHighestSalary;
 use Example\App\UseCase\GetDepartmentsAlongHighestSalary\GetDepartmentsAlongHighestSalaryInterface;
 
 class DbalGetDepartmentsAlongHighestSalaryTest extends AbstractGetDepartmentsAlongHighestSalaryTest
