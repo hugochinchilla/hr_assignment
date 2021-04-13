@@ -7,7 +7,7 @@ namespace Example\App\UseCase\GetDepartmentsAlongHighestSalary;
 interface GetDepartmentsAlongHighestSalaryInterface
 {
     /**
-     * @return DepartmentWithSalaryEntry[]
+     * @return DepartmentWithSalaryDTO[]
      */
     public function execute(): array;
 }

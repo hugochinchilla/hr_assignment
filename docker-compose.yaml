@@ -11,6 +11,8 @@ services:
         depends_on:
             - mariadb
         user: $DOCKER_COMPOSE_USER
+        ports:
+            - 8000:8000
 
     mariadb:
         image: mariadb

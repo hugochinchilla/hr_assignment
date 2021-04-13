@@ -10,6 +10,9 @@ RUN find / -name "xdebug.so" -exec ln -s {} /usr/local/lib/php/extensions/xdebug
 WORKDIR /code
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/bin/composer
 ADD composer.json /code/
-RUN composer install
+RUN composer install --no-scripts
 
 ADD . /code
+
+EXPOSE 8000
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]

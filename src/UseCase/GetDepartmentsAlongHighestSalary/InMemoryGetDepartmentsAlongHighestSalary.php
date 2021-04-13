@@ -13,7 +13,7 @@ class InMemoryGetDepartmentsAlongHighestSalary implements GetDepartmentsAlongHig
     }
 
     /**
-     * @return DepartmentWithSalaryEntry[]
+     * @return DepartmentWithSalaryDTO[]
      */
     public function execute(): array
     {
@@ -30,7 +30,7 @@ class InMemoryGetDepartmentsAlongHighestSalary implements GetDepartmentsAlongHig
                 }
             }
 
-            yield new DepartmentWithSalaryEntry($department->name(), $highestSalary);
+            yield new DepartmentWithSalaryDTO($department->name(), $highestSalary);
         }
     }
 }

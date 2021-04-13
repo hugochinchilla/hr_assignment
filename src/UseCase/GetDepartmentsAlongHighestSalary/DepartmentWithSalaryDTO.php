@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Example\App\UseCase\GetDepartmentsAlongHighestSalary;
 
-class DepartmentWithSalaryEntry
+class DepartmentWithSalaryDTO
 {
     public function __construct(private string $name, private int $highestSalary)
     {

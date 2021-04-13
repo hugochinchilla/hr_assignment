@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-use App\Kernel;
+use Example\App\Api\Kernel;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;

@@ -8,7 +8,7 @@ use Example\App\Domain\Entity\Department;
 use Example\App\Domain\Entity\DepartmentRepository;
 use Example\App\Domain\Entity\Employee;
 use Example\App\Domain\ValueObject\DepartmentId;
-use Example\App\UseCase\GetDepartmentsAlongHighestSalary\DepartmentWithSalaryEntry;
+use Example\App\UseCase\GetDepartmentsAlongHighestSalary\DepartmentWithSalaryDTO;
 use Example\App\UseCase\GetDepartmentsAlongHighestSalary\GetDepartmentsAlongHighestSalaryInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +37,7 @@ abstract class AbstractGetDepartmentsAlongHighestSalaryTest extends TestCase
         $result = $this->query->execute();
 
         self::assertEquals($result, [
-            new DepartmentWithSalaryEntry('Marketing', 0),
+            new DepartmentWithSalaryDTO('Marketing', 0),
         ]);
     }
 
@@ -56,7 +56,7 @@ abstract class AbstractGetDepartmentsAlongHighestSalaryTest extends TestCase
         $result = $this->query->execute();
 
         self::assertEquals($result, [
-            new DepartmentWithSalaryEntry('IT', 70000),
+            new DepartmentWithSalaryDTO('IT', 70000),
         ]);
     }
 }

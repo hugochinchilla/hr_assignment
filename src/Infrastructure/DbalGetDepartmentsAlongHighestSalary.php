@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Example\App\Infrastructure;
 
 use Doctrine\DBAL\Connection;
-use Example\App\UseCase\GetDepartmentsAlongHighestSalary\DepartmentWithSalaryEntry;
+use Example\App\UseCase\GetDepartmentsAlongHighestSalary\DepartmentWithSalaryDTO;
 use Example\App\UseCase\GetDepartmentsAlongHighestSalary\GetDepartmentsAlongHighestSalaryInterface;
 
 class DbalGetDepartmentsAlongHighestSalary implements GetDepartmentsAlongHighestSalaryInterface
@@ -34,7 +34,7 @@ class DbalGetDepartmentsAlongHighestSalary implements GetDepartmentsAlongHighest
         $cursor = $stmt->execute();
 
         foreach ($cursor->fetchAllAssociative() as $row) {
-            yield new DepartmentWithSalaryEntry($row['name'], (int) $row['salary']);
+            yield new DepartmentWithSalaryDTO($row['name'], (int) $row['salary']);
         }
     }
 }
