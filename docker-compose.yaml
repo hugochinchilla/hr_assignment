@@ -8,6 +8,8 @@ services:
             HOME: /code
         volumes:
             - ".:/code:cached"
+        depends_on:
+            - mariadb
         user: $DOCKER_COMPOSE_USER
 
     mariadb:

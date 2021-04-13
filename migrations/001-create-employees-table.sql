@@ -1,4 +1,4 @@
-CREATE TABLE employees
+CREATE TABLE IF NOT EXISTS employees
 (
     id BINARY(16) PRIMARY KEY,
     name VARCHAR(128) NOT NULL,

@@ -6,6 +6,7 @@
          backupGlobals="false"
          colors="true"
          executionOrder="random"
+         bootstrap="tests/bootstrap.php"
 >
     <php>
         <ini name="error_reporting" value="-1"/>
